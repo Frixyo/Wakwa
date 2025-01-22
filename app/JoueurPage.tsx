@@ -1,20 +1,27 @@
-import { Text, View, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Keyboard, ScrollView,ImageBackground } from 'react-native';
 import { useEffect, useState } from 'react';
 import { SQLiteDatabase, SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
+import { Link } from 'expo-router'; 
 
 export default function JoueurPage() {
   const [joueurs, setJoueurs] = useState<Joueur[]>([]);
 
   return (
-    <SQLiteProvider databaseName="my_database.db" assetSource={{ assetId: require('../assets/db/my_database.db') }}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView>
-          <View style={styles.content}>
-            <Content joueurs={joueurs} setJoueurs={setJoueurs} />
-            <AddPlayer setJoueurs={setJoueurs} />
-          </View>
-        </ScrollView>
-      </TouchableWithoutFeedback>
+    <SQLiteProvider databaseName="mydatabase.db" assetSource={{ assetId: require('../assets/db/mydatabase.db') }}>
+      <ImageBackground
+            source={require('../assets/bg/bg_1.png')}
+            style={styles.background}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <ScrollView>
+            <View style={styles.content}>
+              <Content joueurs={joueurs} setJoueurs={setJoueurs} />
+              <AddPlayer setJoueurs={setJoueurs} />
+              <Link href="/" > Go to Edit screen </Link>
+            </View>
+          </ScrollView>
+        </TouchableWithoutFeedback>
+      </ImageBackground>
     </SQLiteProvider>
   );
 }
@@ -115,6 +122,10 @@ function AddPlayer({ setJoueurs }: AddPlayerProps) {
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   content: {
     flexDirection: 'column',
     padding: 16,
