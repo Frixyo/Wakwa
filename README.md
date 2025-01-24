@@ -1,3 +1,5 @@
+
+
 1. Install dependencies
 
    ```bash
@@ -10,10 +12,14 @@
       npm run start
    ```
 
-## Reinstaler la BD
+## Reinstaller la BD
 
    go into assets/db
    delete mydatabase.db
    ```bash
       sqlite3 mydatabase.db < init.sql
    ```
+3. Expo go
+
+   CTRL+C pour fermer l'appli
+
