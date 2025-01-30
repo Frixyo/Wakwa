@@ -13,7 +13,7 @@ export default function Index() {
   
 
   return (
-    <SQLiteProvider databaseName="mydatabase.db" assetSource={{ assetId: require('../assets/db/mydatabase.db') }}>
+    <SQLiteProvider databaseName="mydatabasetest3.db" assetSource={{ assetId: require('../assets/db/mydatabasetest3.db') }}>
       <ImageBackground source={require('../assets/bg/bg_1.png')} style={styles.background}>
       <ScrollView>
       <View>
@@ -40,16 +40,16 @@ function Plateaux() {
 
   const fetchPlateaux = async () => {
     try {
-      console.log('Fetching plateaux...');
       const result = await db.getAllAsync<Plateau>('SELECT * FROM plateaux');
-      console.log('Fetched plateaux:', result);
       setPlateaux(result);
     } catch (error) {
       console.error('Erreur lors de la récupération des plateaux:', error);
     }
   };
 
-
+  useEffect(() => {
+    fetchPlateaux();
+  }, []);
 
   const handleButtonPress = (index) => {
     setSelectedPlateauIndex(index);
@@ -58,11 +58,10 @@ function Plateaux() {
 
   const closePopup = () => {
     setModalVisible(false);
-};
+  };
 
   return (
     <View style={styles.container}>
-      <Button onPress={fetchPlateaux} title="Charger les Plateaux" color="#841584" />
       <View style={styles.list}>
         {plateaux.length > 0 ? (
           plateaux.map((plateau) => (
@@ -78,12 +77,17 @@ function Plateaux() {
       <Modal isVisible={isModalVisible} onBackdropPress={closePopup}>
         <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Options</Text>
-            <TouchableOpacity style={styles.modalButton} onPress={closePopup}>
+
+            <TouchableOpacity style={styles.modalButton}>
+              <Link href={`/GamePage?plateauId=${selectedPlateauIndex}`}>
                 <Text style={styles.modalButtonText}>Start Game</Text>
+              </Link>
             </TouchableOpacity>
+
             <TouchableOpacity style={styles.modalButton}>
                 <Text style={styles.modalButtonText}>Option 2</Text>
             </TouchableOpacity>
+
             <TouchableOpacity style={styles.modalButton} onPress={closePopup}>
                 <Text style={styles.modalButtonText}>Close</Text>
             </TouchableOpacity>

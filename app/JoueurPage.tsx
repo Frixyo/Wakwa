@@ -3,22 +3,27 @@ import { useEffect, useState } from 'react';
 import { SQLiteDatabase, SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
 import { Link } from 'expo-router'; 
 
+interface Joueur {
+  name: string;
+  image: string;
+  id: string;
+}
+
 export default function JoueurPage() {
   const [joueurs, setJoueurs] = useState<Joueur[]>([]);
 
   return (
-    <SQLiteProvider databaseName="mydatabase.db" assetSource={{ assetId: require('../assets/db/mydatabase.db') }}>
-      <ImageBackground
-            source={require('../assets/bg/bg_1.png')}
-            style={styles.background}
-      >
+    <SQLiteProvider databaseName="mydatabasetest3.db" assetSource={{ assetId: require('../assets/db/mydatabasetest3.db') }}>
+      <ImageBackground source={require('../assets/bg/bg_1.png')} style={styles.background}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <ScrollView>
+
             <View style={styles.content}>
               <Content joueurs={joueurs} setJoueurs={setJoueurs} />
               <AddPlayer setJoueurs={setJoueurs} />
-              <Link href="/" > Go to Edit screen </Link>
+              <Link href="/" > Go to Main screen </Link>
             </View>
+
           </ScrollView>
         </TouchableWithoutFeedback>
       </ImageBackground>
@@ -26,11 +31,6 @@ export default function JoueurPage() {
   );
 }
 
-interface Joueur {
-  name: string;
-  image: string;
-  id: string;
-}
 
 interface ContentProps {
   joueurs: Joueur[];
@@ -76,6 +76,7 @@ function Content({ joueurs, setJoueurs }: ContentProps) {
   );
 }
 
+
 interface AddPlayerProps {
   setJoueurs: (joueurs: Joueur[]) => void;
 }
@@ -88,8 +89,7 @@ function AddPlayer({ setJoueurs }: AddPlayerProps) {
   async function getSmallestAvailableId(db : SQLiteDatabase) {
     const result = await db.getAllAsync('SELECT id FROM users ORDER BY id');
     let smallestId = 1;
-  
-    // Trouver l'ID manquant
+
     result.forEach((joueur) => {
       if (joueur.id === smallestId) {
         smallestId++;
@@ -110,6 +110,7 @@ function AddPlayer({ setJoueurs }: AddPlayerProps) {
     setJoueurs(result);
     setName('');
     setImage('');
+    console.log(`Joueur avec id ${index} supprimé.`);
   };
 
   return (
