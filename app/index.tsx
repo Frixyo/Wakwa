@@ -19,8 +19,6 @@ export default function Index() {
       <View>
         <Text>Home screen</Text>
         <Link href="/JoueurPage"> Go to Joueur screen </Link>
-        <Link href="/GamePage"> Go to Game screen </Link>
-        <Link href="/EditPage"> Go to Edit screen </Link>
       </View>
 
 
@@ -35,6 +33,7 @@ export default function Index() {
 function Plateaux() {
   const db = useSQLiteContext();
   const [plateaux, setPlateaux] = useState<Plateau[]>([]);
+  const [listPlateaux, setListPlateaux] = useState<Record<string, number>>({});
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedPlateauIndex, setSelectedPlateauIndex] = useState(null);
 
@@ -42,6 +41,25 @@ function Plateaux() {
     try {
       const result = await db.getAllAsync<Plateau>('SELECT * FROM plateaux');
       setPlateaux(result);
+      const result1 = await db.getAllAsync('SELECT * FROM Plateau1');
+      const result2 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau2');
+      const result3 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau3');
+      const result4 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau4');
+      const result5 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau5');
+      const result6 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau6');
+      const result7 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau7');
+      const result8 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau8');
+      setListPlateaux({
+        1: result1.length,
+        2: result2.length,
+        3: result3.length,
+        4: result4.length,
+        5: result5.length,
+        6: result6.length,
+        7: result7.length,
+        8: result8.length
+      });
+
     } catch (error) {
       console.error('Erreur lors de la récupération des plateaux:', error);
     }
@@ -58,6 +76,7 @@ function Plateaux() {
 
   const closePopup = () => {
     setModalVisible(false);
+    console.log(listPlateaux);
   };
 
   return (
@@ -78,7 +97,7 @@ function Plateaux() {
         <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Options</Text>
 
-            <TouchableOpacity style={styles.modalButton}>
+            <TouchableOpacity style={styles.modalButton} disabled={listPlateaux.selectedPlateauIndex == 0}>
               <Link href={`/GamePage?plateauId=${selectedPlateauIndex}`}>
                 <Text style={styles.modalButtonText}>Start Game</Text>
               </Link>
