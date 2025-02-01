@@ -6,6 +6,7 @@ import { imageMapping,playerImageMapping } from './images';
 import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
 import Modal from 'react-native-modal';
 import { Link } from 'expo-router'; 
+import { getNavigationConfig } from 'expo-router/build/getLinkingConfig';
 
 
 interface Case {
@@ -71,6 +72,7 @@ function Game({ plateauId }) {
     }
   };
   
+
   
   useEffect(() => {
     if (plateauId) {
@@ -143,10 +145,12 @@ function Game({ plateauId }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.controls}>
-        <Text style={styles.caseText}> {currentIndex} / {cases.length - 2}</Text>
-        <TouchableOpacity onPress={openPopupParametre}>
-            <Text style={styles.controlButton}>Affichier la description</Text>
+
+      <View style={styles.controlsTop}>
+        <Text style={styles.caseTextTop}> nom joueur </Text>
+        <Text style={styles.caseTextTop}>{currentIndex} / {cases.length - 2}</Text>
+        <TouchableOpacity onPress={openPopupParametre} style={styles.gameButton}>
+            <Text style={styles.modalButtonText} >Parametre</Text>
           </TouchableOpacity>
       </View>
   
@@ -183,31 +187,33 @@ function Game({ plateauId }) {
       </View>
   
       <View style={styles.controls}>
+
         <View>
-          <TouchableOpacity onPress={changerJoueur}>
-            <Text style={styles.controlButton}>Changer de joueur</Text>
+          <TouchableOpacity onPress={changerJoueur} style={styles.gameButton}>
+            <Text style={styles.gameButtonText}>Changer de joueur</Text>
           </TouchableOpacity>
         </View>
   
         <View>
-          <TouchableOpacity onPress={openPopupActionGame}>
-            <Text style={styles.controlButton}>Affichier la description</Text>
+          <TouchableOpacity onPress={openPopupActionGame} style={styles.gameButton}>
+            <Text style={styles.gameButtonText}>Affichier la description</Text>
           </TouchableOpacity>
         </View>
   
-        <View>
-          <TouchableOpacity onPress={rollDice}>
-            <Text style={styles.controlButton}>Lancer le Dé</Text>
+        <View style={styles.controlsInterne}>
+          <TouchableOpacity onPress={rollDice} style={styles.gameButton}>
+            <Text style={styles.gameButtonText}>Lancer le Dé</Text>
           </TouchableOpacity>
   
-          <View>
-            <TouchableOpacity onPress={goPrev} disabled={currentIndex <= 1}>
-              <Text style={styles.controlButton}>-1</Text>
+          <View style={styles.controlsInternePosition}>
+            <TouchableOpacity onPress={goPrev} disabled={currentIndex <= 1} style={[styles.gameButton, styles.gameButtonFlex]}>
+              <Text style={styles.gameButtonText}>-1</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={goNext} disabled={currentIndex >= cases.length - 2}>
-              <Text style={styles.controlButton}>+1</Text>
+            <TouchableOpacity onPress={goNext} disabled={currentIndex >= cases.length - 2} style={[styles.gameButton, styles.gameButtonFlex]}>
+              <Text style={styles.gameButtonText}>+1</Text>
             </TouchableOpacity>
           </View>
+
         </View>
       </View>
   
@@ -261,8 +267,8 @@ function MyModalParametre({ isModalVisible, setModalVisible}) {
             <Text style={styles.modalButtonText}>Quitter la partie</Text>
           </Link>
         </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.modalButton}>
+
+        <TouchableOpacity style={styles.modalButton} onPress={closePopup}>
           <Text style={styles.modalButtonText}>Close</Text>
         </TouchableOpacity>
 
@@ -280,12 +286,14 @@ const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   controls: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    top: 40,
+    width: '90%',
   },
   controlButton: {
     fontSize: 30,
@@ -301,7 +309,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 200,
     overflow: 'hidden',
-    position: 'relative', // Permet de positionner les joueurs dessus
+    position: 'relative',
   },
   case: {
     width: '33%',
@@ -315,11 +323,9 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'contain',
   },
-
-  // 🔹 Ajout du style pour afficher les joueurs
   joueursContainer: {
     position: 'absolute',
-    top: 40, // Ajuster selon la position des cases
+    top: 40,
     left: 0,
     width: '100%',
     height: 200,
@@ -327,25 +333,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  joueurIcon: {
-    position: 'absolute',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Pour rendre visible
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   joueurImage: {
     width: 40,
     height: 40,
     resizeMode: 'contain',
   },
-
   modalContainer: {
     backgroundColor: 'white',
     padding: 20,
-    borderRadius: 10,
+    borderRadius: 5,
     alignItems: 'center',
   },
   modalTitle: {
@@ -367,5 +363,39 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  gameButton:{
+    backgroundColor: 'red',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    marginVertical: 5,
+  },
+  gameButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  controlsInterne: {
+    flexDirection: 'column',
+  },
+  controlsInternePosition:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  gameButtonFlex:{
+    width: 50,    
+  },
+  controlsTop:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '90%',
+  },
+  caseTextTop:{
+    backgroundColor: 'white',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginVertical: 5,
   },
 });
