@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Button, Scro
 import { Link } from 'expo-router'; 
 import { useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
-import { SQLiteDatabase, SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
+import {SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
 
 interface Plateau {
   id: string;
@@ -76,7 +76,6 @@ function Plateaux() {
 
   const closePopup = () => {
     setModalVisible(false);
-    console.log(listPlateaux);
   };
 
   return (
@@ -104,7 +103,9 @@ function Plateaux() {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.modalButton}>
-                <Text style={styles.modalButtonText}>Option 2</Text>
+            <Link href={`/EditPage?plateauId=${selectedPlateauIndex}`}>
+                <Text style={styles.modalButtonText}>Edit Plateau</Text>
+              </Link>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.modalButton} onPress={closePopup}>

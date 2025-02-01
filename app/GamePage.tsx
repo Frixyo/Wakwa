@@ -3,10 +3,9 @@ import { Text, View, StyleSheet, ImageBackground, Image, TouchableOpacity } from
 import { useLocalSearchParams } from "expo-router";
 import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
 import { imageMapping,playerImageMapping } from './images';
-import Animated, { useSharedValue, withSpring } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import Modal from 'react-native-modal';
 import { Link } from 'expo-router'; 
-import { getNavigationConfig } from 'expo-router/build/getLinkingConfig';
 
 
 interface Case {
@@ -147,11 +146,11 @@ function Game({ plateauId }) {
     <View style={styles.container}>
 
       <View style={styles.controlsTop}>
-        <Text style={styles.caseTextTop}> nom joueur </Text>
+        <Text style={styles.caseTextTop}>{joueurs[joueurActifIndex]?.name || ""}</Text>
         <Text style={styles.caseTextTop}>{currentIndex} / {cases.length - 2}</Text>
         <TouchableOpacity onPress={openPopupParametre} style={styles.gameButton}>
             <Text style={styles.modalButtonText} >Parametre</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
       </View>
   
       <View>
