@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Button, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
 import { Link } from 'expo-router'; 
 import { useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
@@ -39,8 +39,11 @@ function Plateaux() {
 
   const fetchPlateaux = async () => {
     try {
+
+
       const result = await db.getAllAsync<Plateau>('SELECT * FROM plateaux');
       setPlateaux(result);
+
       const result1 = await db.getAllAsync('SELECT * FROM Plateau1');
       const result2 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau2');
       const result3 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau3');
@@ -103,7 +106,7 @@ function Plateaux() {
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.modalButton}>
-            <Link href={`/EditPage?plateauId=${selectedPlateauIndex}`}>
+              <Link href={`/EditPage?plateauId=${selectedPlateauIndex}`}>
                 <Text style={styles.modalButtonText}>Edit Plateau</Text>
               </Link>
             </TouchableOpacity>
