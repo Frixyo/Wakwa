@@ -1,0 +1,113 @@
+{
+  "plateaus": [
+    {
+      "nom": "Plateau 1",
+      "plateau": [
+        {
+          "image": "cartebb_01",
+          "text": "Case BB 1"
+        },
+        {
+          "image": "cartebb_01",
+          "text": "Case BB 2"
+        },
+        {
+          "image": "cartemarron_01",
+          "text": "Case Marron 1"
+        },
+        {
+          "image": "cartemarron_01",
+          "text": "Case Marron 2"
+        },
+        {
+          "image": "carterouge_01",
+          "text": "Case Rouge 1"
+        },
+        {
+          "image": "carterouge_01",
+          "text": "Case Rouge 2"
+        },
+        {
+          "image": "cartevert_01",
+          "text": "Case Vert 1"
+        },
+        {
+          "image": "cartevert_01",
+          "text": "Case Vert 2"
+        },
+        {
+          "image": "carteviolet_01",
+          "text": "Case Violet 1"
+        },
+        {
+          "image": "carteviolet_01",
+          "text": "Case Violet 2"
+        }
+      ]
+    },
+    {
+      "nom": "Plateau 2",
+      "plateau": [
+        {
+          "image": "cartebb_01",
+          "text": "Case BB"
+        },
+        {
+          "image": "cartebb_01",
+          "text": "Case BB"
+        },
+        {
+          "image": "cartebb_01",
+          "text": "Case BB"
+        },
+        {
+          "image": "cartebb_01",
+          "text": "Case BB"
+        },
+        {
+          "image": "cartebb_01",
+          "text": "Case BB"
+        },
+        {
+          "image": "cartebb_01",
+          "text": "Case BB"
+        },
+        {
+          "image": "cartebb_01",
+          "text": "Case BB"
+        }
+      ]
+    },
+    {
+      "nom": "Plateau 3",
+      "plateau": [
+      ]
+    },
+    {
+      "nom": "Plateau 4",
+      "plateau": [
+      ]
+    },
+    {
+      "nom": "Plateau 5",
+      "plateau": [
+      ]
+    },
+    {
+      "nom": "Plateau 6",
+      "plateau": [
+      ]
+    },
+    {
+      "nom": "Plateau 7",
+      "plateau": [
+      ]
+    },
+    {
+      "nom": "Plateau 8",
+      "plateau": [
+      ]
+    }
+  ]
+}
+
