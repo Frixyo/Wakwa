@@ -1,4 +1,4 @@
-import { imageMapping } from '../Constant/images';
+import { imageMapping } from '../constants/images';
 
 export default interface Case {
     description: string;

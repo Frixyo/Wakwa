@@ -1,12 +1,15 @@
+// Import librairies
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, ScrollView,TouchableOpacity, Image } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
 import { Link } from 'expo-router'; 
-import { imageMappingPlayable } from '../../Constant/images';
 
-//Import Model
-import Case from '../../Model/Case';
-import EditProps from '../../Model/EditProps';
+// Import constants
+import { imageMappingPlayable } from '../../constants/images';
+
+// Import models
+import Case from '../../models/Case';
+import EditProps from '../../models/EditProps';
 
 
 function Edit({ plateauId } : EditProps) {

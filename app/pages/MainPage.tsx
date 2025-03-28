@@ -1,7 +1,10 @@
+// Import librairies
 import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import { Link } from 'expo-router'; 
 import {SQLiteProvider} from 'expo-sqlite';
-import Plateaux from '../Component/Core/Plateaux';
+
+// Import components
+import Plateaux from '../components/cores/Plateaux';
 
 export default function MainPage() {
 
@@ -11,8 +14,8 @@ export default function MainPage() {
         <ScrollView>
 
             <View>
-            <Text>Home screen</Text>
-            <Link href="/Page/JoueurPage"> Go to Joueur screen </Link>
+              <Text>Home screen</Text>
+              <Link href="/Page/JoueurPage"> Go to Joueur screen </Link>
             </View>
 
             <Plateaux/>
@@ -23,7 +26,6 @@ export default function MainPage() {
   );
   
 }
-
 
 const styles = StyleSheet.create({
   background: {

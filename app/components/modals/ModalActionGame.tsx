@@ -1,30 +1,21 @@
+// Import librairies
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
-import { Link } from 'expo-router'; 
 
 // Import Model
-import ModalParametreProps from '../../Model/ModalParametreProps';
+import ModalActionGameProps  from '../../models/ModalActionGameProps';
 
-
-function ModalParametre({ isModalVisible, closePopupParametre} : ModalParametreProps) {
+export default function ModalActionGame({ isModalVisible, closePopupActionGame, currentCase }: ModalActionGameProps) {
+    const description = currentCase?.description ?? "test";
 
     return (
-      <Modal isVisible={isModalVisible} onBackdropPress={closePopupParametre}>
+      <Modal isVisible={isModalVisible} onBackdropPress={closePopupActionGame}>
         <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Parametre</Text>
-          <Text style={styles.modalDescription}>Attention la partie ne sera pas sauvegardé</Text>
-  
-          <TouchableOpacity style={styles.modalButton} onPress={closePopupParametre}>
-            <Link href={`/`}>
-              <Text style={styles.modalButtonText}>Quitter la partie</Text>
-            </Link>
-          </TouchableOpacity>
-  
-          <TouchableOpacity style={styles.modalButton} onPress={closePopupParametre}>
+          <Text style={styles.modalTitle}>Description</Text>
+          <Text style={styles.modalDescription}>{description}</Text>
+          <TouchableOpacity style={styles.modalButton} onPress={closePopupActionGame}>
             <Text style={styles.modalButtonText}>Close</Text>
           </TouchableOpacity>
-  
-          
         </View>
       </Modal>
     );
@@ -58,6 +49,3 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
     }
 });
-
-
-export default ModalParametre;

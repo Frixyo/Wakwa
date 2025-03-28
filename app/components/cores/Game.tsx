@@ -2,17 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
-import { imageMapping,playerImageMapping } from '../../Constant/images';
 import Animated from 'react-native-reanimated';
 
-// Import Component
-import MyModalActionGame from '../Modal/ModalActionGame';
-import MyModalParametre from '../Modal/ModalParametre';
+// Import components
+import MyModalActionGame from '../modals/ModalActionGame';
+import MyModalParametre from '../modals/ModalParametre';
 
-// Import Model
-import Case from '../../Model/Case';
-import Joueur from '../../Model/Joueur';
-import GameProps from '../../Model/GameProps';
+// Import constants
+import { imageMapping,playerImageMapping } from '../../constants/images';
+
+// Import models
+import Case from '../../models/Case';
+import Joueur from '../../models/Joueur';
+import GameProps from '../../models/GameProps';
 
 
 function Game({ plateauId }: GameProps) {

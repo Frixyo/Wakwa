@@ -1,4 +1,4 @@
-import Case from "../Model/Case";
+import Case from "../models/Case";
 
 export default interface ModalActionGameProps {
     isModalVisible: boolean;

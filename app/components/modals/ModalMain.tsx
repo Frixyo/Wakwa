@@ -1,11 +1,12 @@
+// Import librairies
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import Modal from 'react-native-modal';
 
-// Import Model
-import ModalMainProps from '../../Model/ModalMainProps';
+// Import models
+import ModalMainProps from '../../models/ModalMainProps';
 
-function ModalMain({ isModalVisible, closePopup, selectedPlateauIndex, listPlateaux }: ModalMainProps) {
+export default function ModalMain({ isModalVisible, closePopup, selectedPlateauIndex, listPlateaux }: ModalMainProps) {
   return (
     <Modal isVisible={isModalVisible} onBackdropPress={closePopup}>
       <View style={styles.modalContainer}>
@@ -60,4 +61,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ModalMain;

@@ -1,4 +1,4 @@
-import { playerImageMapping } from '../Constant/images';
+import { playerImageMapping } from '../constants/images';
 
 export default interface Joueur {
     name: string;

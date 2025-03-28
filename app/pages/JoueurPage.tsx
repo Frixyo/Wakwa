@@ -1,13 +1,15 @@
-import { Text, View, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Keyboard, ScrollView,ImageBackground } from 'react-native';
-import { useEffect, useState } from 'react';
-import { SQLiteDatabase, SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
+// Import librairies
+import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, ScrollView,ImageBackground } from 'react-native';
+import { useState } from 'react';
+import { SQLiteProvider } from 'expo-sqlite';
 import { Link } from 'expo-router';
 
-// Import Components
-import Players from '../Component/Core/Players';
-import AddPlayer from '../Component/Core/AddPlayer';
-// Import Model
-import Joueur from '../Model/Joueur';
+// Import components
+import Players from '../components/cores/Players';
+import AddPlayer from '../components/cores/AddPlayer';
+
+// Import models
+import Joueur from '../models/Joueur';
 
 
 export default function JoueurPage() {

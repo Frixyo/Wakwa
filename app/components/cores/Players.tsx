@@ -1,10 +1,11 @@
+// Imort librairies
 import { Text, View, StyleSheet, Button} from 'react-native';
 import { useEffect } from 'react';
 import { useSQLiteContext } from 'expo-sqlite';
 
-// Import Model
-import Joueur from '../../Model/Joueur';
-import PlayersProps from '../../Model/PlayersProps';
+// Import models
+import Joueur from '../../models/Joueur';
+import PlayersProps from '../../models/PlayersProps';
 
 
 export default function Players({ joueurs, setJoueurs }: PlayersProps) {

@@ -1,11 +1,11 @@
-//Import librairies
+// Import librairies
 import { View, StyleSheet, TextInput, Button } from 'react-native';
 import { useState } from 'react';
 import { useSQLiteContext } from 'expo-sqlite';
 
-// Import Model
-import Joueur from '../../Model/Joueur';
-import AddPlayerProps from '../../Model/AddPlayersProps';
+// Import models
+import Joueur from '../../models/Joueur';
+import AddPlayerProps from '../../models/AddPlayersProps';
 
 export default function AddPlayer({ setJoueurs }: AddPlayerProps) {
 

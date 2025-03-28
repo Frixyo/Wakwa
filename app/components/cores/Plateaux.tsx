@@ -1,10 +1,14 @@
+// Import librairies
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
 import {useSQLiteContext } from 'expo-sqlite';
-import ModalMain from '../Modal/ModalMain';
 
-// Import Model
-import Plateau from '../../Model/Plateau';
+// Import components
+import ModalMain from '../modals/ModalMain';
+
+// Import models
+import Plateau from '../../models/Plateau';
+
 
 
 function Plateaux() {
