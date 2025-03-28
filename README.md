@@ -17,7 +17,7 @@ Wakwa est une application permettant de créer des jeux de plateau dans le style
 
 1. Clonez ce dépôt sur votre machine locale :
    ```bash
-   git clone https://github.com/votre-utilisateur/Wakwa.git
+   git clone https://github.com/Frixyo/Wakwa.git
    ```
 
 ---
