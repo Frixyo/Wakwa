@@ -15,7 +15,7 @@ export default function MainPage() {
 
             <View>
               <Text>Home screen</Text>
-              <Link href="/Page/JoueurPage"> Go to Joueur screen </Link>
+              <Link href="/pages/JoueurPage"> Go to Joueur screen </Link>
             </View>
 
             <Plateaux/>

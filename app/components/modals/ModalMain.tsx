@@ -16,13 +16,13 @@ export default function ModalMain({ isModalVisible, closePopup, selectedPlateauI
           style={styles.modalButton}
           disabled={!selectedPlateauIndex || listPlateaux[selectedPlateauIndex] === 0}
         >
-          <Link href={`/Page/GamePage?plateauId=${selectedPlateauIndex}`}>
+          <Link href={`/pages/GamePage?plateauId=${selectedPlateauIndex}`}>
             <Text style={styles.modalButtonText}>Start Game</Text>
           </Link>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.modalButton}>
-          <Link href={`/Page/EditPage?plateauId=${selectedPlateauIndex}`}>
+          <Link href={`/pages/EditPage?plateauId=${selectedPlateauIndex}`}>
             <Text style={styles.modalButtonText}>Edit Plateau</Text>
           </Link>
         </TouchableOpacity>

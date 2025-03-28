@@ -1,4 +1,4 @@
-import MainPage from "./Page/MainPage";
+import MainPage from "./pages/MainPage";
 
 export default function Index() {
 

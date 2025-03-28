@@ -38,7 +38,7 @@ function Game({ plateauId }: GameProps) {
           { description: "Case Début", image: "carteDebut" },
           ...result.map(item => ({
             description: item.description,
-            image: item.image as keyof typeof imageMapping, // Cast to expected type
+            image: item.image as keyof typeof imageMapping,
           })),
           { description: "Case Fin", image: "carteFin" },
           { description: "Case Vide", image: "cartevide_01" },
