@@ -15,10 +15,19 @@ Commande de base pour Haulstein
       npm i
    ```
 
+2. Push des fichiers
+   ```bash
+      git add *
+      git commit -m"description du log"
+      git push
+   ```
+
 2. Start the app
 
    ```bash
       npm run start
+
+      faire s pour passer à expo go
    ```
 
 ## Reinstaller la BD
