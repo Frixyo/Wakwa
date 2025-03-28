@@ -1,6 +1,6 @@
 export default interface ModalMainProps {
   isModalVisible: boolean;
   closePopup: () => void;
-  selectedPlateauIndex: string | null;
+  selectedPlateauIndex: number | null;
   listPlateaux: Record<string, number>;
 }

@@ -6,27 +6,35 @@ import { Link } from 'expo-router';
 // Import models
 import ModalParametreProps from '../../models/ModalParametreProps';
 
-
+/**
+ * ModalParametre component
+ * Modal to display game parameters and options
+ * 
+ * @param {isModalVisible} boolean - The state of the modal
+ * @param {closePopupParametre} void - The function to close the modal
+ */
 export default function ModalParametre({ isModalVisible, closePopupParametre} : ModalParametreProps) {
 
     return (
       <Modal isVisible={isModalVisible} onBackdropPress={closePopupParametre}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Parametre</Text>
-          <Text style={styles.modalDescription}>Attention la partie ne sera pas sauvegardé</Text>
-  
-          <TouchableOpacity style={styles.modalButton} onPress={closePopupParametre}>
-            <Link href={`/`}>
-              <Text style={styles.modalButtonText}>Quitter la partie</Text>
-            </Link>
-          </TouchableOpacity>
-  
-          <TouchableOpacity style={styles.modalButton} onPress={closePopupParametre}>
-            <Text style={styles.modalButtonText}>Close</Text>
-          </TouchableOpacity>
-  
-          
-        </View>
+          <View style={styles.modalContainer}>
+
+              <Text style={styles.modalTitle}>Parametre</Text>
+              <Text style={styles.modalDescription}>Attention la partie ne sera pas sauvegardé</Text>
+      
+              
+              <TouchableOpacity style={styles.modalButton} onPress={closePopupParametre}>
+                  <Link href={`/`}>
+                      <Text style={styles.modalButtonText}>Quitter la partie</Text>
+                  </Link>
+              </TouchableOpacity>
+              
+      
+              <TouchableOpacity style={styles.modalButton} onPress={closePopupParametre}>
+                <Text style={styles.modalButtonText}>Close</Text>
+              </TouchableOpacity>
+
+          </View>
       </Modal>
     );
 }

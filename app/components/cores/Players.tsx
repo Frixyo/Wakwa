@@ -20,7 +20,7 @@ export default function Players({ joueurs, setJoueurs }: PlayersProps) {
       fetchJoueurs();
     }, [db]);
   
-    const supprimerJoueur = async (index) => {
+    const supprimerJoueur = async (index : number) => {
       try {
         await db.runAsync('DELETE FROM users WHERE id = $id', { $id: index });
         await db.runAsync("UPDATE users SET id = (SELECT COUNT(*) FROM users u2 WHERE u2.id < users.id) + 1;");

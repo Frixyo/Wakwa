@@ -221,11 +221,6 @@ function Game({ plateauId }: GameProps) {
 
 
 const styles = StyleSheet.create({
-    background: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
     container: {
       width: '100%',
       alignItems: 'center'
@@ -236,11 +231,6 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       top: 40,
       width: '90%',
-    },
-    controlButton: {
-      fontSize: 30,
-      marginHorizontal: 20,
-      color: 'white',
     },
     caseText: {
       fontSize: 20,
@@ -265,41 +255,10 @@ const styles = StyleSheet.create({
       height: '100%',
       resizeMode: 'contain',
     },
-    joueursContainer: {
-      position: 'absolute',
-      top: 40,
-      left: 0,
-      width: '100%',
-      height: 200,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-    },
     joueurImage: {
       width: 40,
       height: 40,
       resizeMode: 'contain',
-    },
-    modalContainer: {
-      backgroundColor: 'white',
-      padding: 20,
-      borderRadius: 5,
-      alignItems: 'center',
-    },
-    modalTitle: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginBottom: 20,
-    },
-    modalButton: {
-      backgroundColor: 'red',
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      borderRadius: 5,
-      marginVertical: 5,
-    },
-    modalDescription: {
-      color: 'black',
     },
     modalButtonText: {
       color: '#fff',

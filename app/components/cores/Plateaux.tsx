@@ -16,7 +16,7 @@ function Plateaux() {
     const [plateaux, setPlateaux] = useState<Plateau[]>([]);
     const [listPlateaux, setListPlateaux] = useState<Record<string, number>>({});
     const [isModalVisible, setModalVisible] = useState(false);
-    const [selectedPlateauIndex, setSelectedPlateauIndex] = useState<string | null>(null);
+    const [selectedPlateauIndex, setSelectedPlateauIndex] = useState<number | null>(null);
   
     const fetchPlateaux = async () => {
       try {
@@ -51,7 +51,7 @@ function Plateaux() {
       fetchPlateaux();
     }, []);
   
-    const handleButtonPress = (index: string) => {
+    const handleButtonPress = (index: number) => {
       setSelectedPlateauIndex(index);
       setModalVisible(true);
     };

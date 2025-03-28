@@ -13,11 +13,12 @@ import EditProps from '../../models/EditProps';
 
 
 function Edit({ plateauId } : EditProps) {
+
+  //States
   const db = useSQLiteContext();
   const [plateauName, setPlateauName] = useState("");
   const [cases, setCases] = useState<Case[]>([]);
 
-  // Récupérer les données du plateau
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -125,8 +126,6 @@ function Edit({ plateauId } : EditProps) {
     </View>
   );
 }
-
-
 
 
 const styles = StyleSheet.create({
