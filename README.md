@@ -1,7 +1,7 @@
-# Wakwa - Créateur de jeu de plateau
+# Wakwa
 
 ## Description
-Wakwa est une application permettant de créer des jeux de plateau dans le style du jeu de l'oie. L'utilisateur peut personnaliser les jeux en définissant les actions de chaque case. Bien que l'application soit déjà utilisable, elle n'est pas encore totalement finalisée et continue d'évoluer.
+Wakwa est une application permettant de créer des jeux de plateau dans le style du jeu de l'oie. L'utilisateur peut personnaliser les jeux en définissant les actions de chaque case.
 
 ---
 
@@ -44,4 +44,5 @@ La version actuelle de l'application est **0.1.0**.
 
 - **Version 1.0.0**  
   - Version stable avec toutes les fonctionnalités principales implémentées.
+  - Nouveau design
 
