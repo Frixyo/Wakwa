@@ -1,15 +1,18 @@
+// Import librairies
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
-import { imageMapping,playerImageMapping } from '../Constant/images';
+import { imageMapping,playerImageMapping } from '../../Constant/images';
 import Animated from 'react-native-reanimated';
-import MyModalActionGame from './Modal/ModalActionGame';
-import MyModalParametre from './Modal/ModalParametre';
+
+// Import Component
+import MyModalActionGame from '../Modal/ModalActionGame';
+import MyModalParametre from '../Modal/ModalParametre';
 
 // Import Model
-import Case from '../Model/Case';
-import Joueur from '../Model/Joueur';
-import GameProps from '../Model/GameProps';
+import Case from '../../Model/Case';
+import Joueur from '../../Model/Joueur';
+import GameProps from '../../Model/GameProps';
 
 
 function Game({ plateauId }: GameProps) {
