@@ -43,9 +43,13 @@ Commande de base pour Haulstein
 
 ## A FAIRE (idée)
 
+1. joueuPage.tsx
+
+   ```bash
    sur joueurPage
    créer 1 zone de texte qui indique le bouton changer de pion
    créer 1 bouton qui affiche un pop up
    créer 1 image qui affiche le pion choisi
-   lorsque le joueur appuie sur url image (choix du pion) une liste défilante s'affiche et permet au joueur de choisir un pion
+   lorsque le joueur appuie sur url image (choix du pion) une liste défilante s'affiche et permet au joueur de choisir un pion.
    une fois le pion choisi le pop up se ferme et affiche le pion choisi sur l'image à droite.
+   ```
