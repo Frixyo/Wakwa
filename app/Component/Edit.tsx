@@ -1,31 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, ImageBackground, TextInput, Button, ScrollView,TouchableOpacity, Image } from 'react-native';
-import { useLocalSearchParams } from "expo-router";
-import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
+import { Text, View, StyleSheet, TextInput, Button, ScrollView,TouchableOpacity, Image } from 'react-native';
+import { useSQLiteContext } from 'expo-sqlite';
 import { Link } from 'expo-router'; 
-import { imageMappingPlayable } from './images'; 
+import { imageMappingPlayable } from '../images'; 
 
 interface Case {
   description: string;
   image: string;
 }
-
-export default function EditPage() {
-  const { plateauId } = useLocalSearchParams();
-
-  return (
-    <SQLiteProvider databaseName="mydatabasetest3.db" assetSource={{ assetId: require('../assets/db/mydatabasetest3.db') }}>
-      <ImageBackground source={require('../assets/bg/bg_1.png')} style={styles.background}>
-        <View>
-          <Edit plateauId={plateauId}/>
-        </View>
-      </ImageBackground>
-    </SQLiteProvider>
-  );
-}
-
-
-
 
 function Edit({ plateauId }) {
   const db = useSQLiteContext();
@@ -169,4 +151,4 @@ const styles = StyleSheet.create({
 });
 
 
-
+export default Edit;
