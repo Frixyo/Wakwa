@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
-import { imageMapping,playerImageMapping } from '../images';
+import { imageMapping,playerImageMapping } from '../Constant/images';
 import Animated from 'react-native-reanimated';
 import MyModalActionGame from './Modal/ModalActionGame';
 import MyModalParametre from './Modal/ModalParametre';
 
-interface Case {
-  description: string;
-  image: keyof typeof imageMapping;
-}
+// Import Model
+import Case from '../Model/Case';
+import Joueur from '../Model/Joueur';
+import GameProps from '../Model/GameProps';
 
-interface Joueur {
-  name: string;
-  image: keyof typeof playerImageMapping;
-}
-
-interface GameProps {
-  plateauId: string;
-}
 
 function Game({ plateauId }: GameProps) {
     const db = useSQLiteContext();
@@ -63,8 +55,6 @@ function Game({ plateauId }: GameProps) {
         console.error('Error fetching joueurs:', error);
       }
     };
-    
-  
     
     useEffect(() => {
       if (plateauId) {
@@ -219,6 +209,7 @@ function Game({ plateauId }: GameProps) {
     
         <MyModalActionGame isModalVisible={isModalVisibleActionGame} closePopupActionGame={closePopupActionGame} currentCase={cases[currentIndex]} />
         <MyModalParametre isModalVisible={isModalVisibleParametre} closePopupParametre={closePopupParametre} />
+
       </View>
     );
 }

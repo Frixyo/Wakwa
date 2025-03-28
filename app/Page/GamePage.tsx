@@ -9,7 +9,9 @@ export default function GamePage() {
   return (
     <SQLiteProvider databaseName="mydatabasetest3.db" assetSource={{ assetId: require('../../assets/db/mydatabasetest3.db') }}>
       <ImageBackground source={require('../../assets/bg/bg_1.png')} style={styles.background}>
-        <Game plateauId={plateauId} />
+
+        <Game plateauId={Array.isArray(plateauId) ? plateauId[0] : plateauId} />
+        
       </ImageBackground>
     </SQLiteProvider>
   );

@@ -1,12 +1,11 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
 import {useSQLiteContext } from 'expo-sqlite';
-import ModalMain from './Modal/ModalMain';
+import ModalMain from '../Modal/ModalMain';
 
-interface Plateau {
-  id: string;
-  name: string;
-}
+// Import Model
+import Plateau from '../../Model/Plateau';
+
 
 function Plateaux() {
     const db = useSQLiteContext();
@@ -17,8 +16,6 @@ function Plateaux() {
   
     const fetchPlateaux = async () => {
       try {
-  
-  
         const result = await db.getAllAsync<Plateau>('SELECT * FROM plateaux');
         setPlateaux(result);
   
@@ -77,10 +74,6 @@ function Plateaux() {
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
   container: {
     flex: 1,
     padding: 20,

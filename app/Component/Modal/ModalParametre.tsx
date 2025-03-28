@@ -2,10 +2,9 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { Link } from 'expo-router'; 
 
-interface ModalParametreProps {
-    isModalVisible: boolean;
-    closePopupParametre: () => void;
-}
+// Import Model
+import ModalParametreProps from '../../Model/ModalParametreProps';
+
 
 function ModalParametre({ isModalVisible, closePopupParametre} : ModalParametreProps) {
 

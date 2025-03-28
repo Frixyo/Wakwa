@@ -1,25 +1,20 @@
+# Wakwa - Créateur de jeu de plateau
 
+## Description
+Wakwa est une application permettant de créer des jeux de plateau dans le style du jeu de l'oie. L'utilisateur peut personnaliser les jeux en définissant les actions de chaque case. Bien que l'application soit déjà utilisable, elle n'est pas encore totalement finalisée et continue d'évoluer.
 
-1. Install dependencies
+---
 
+## Fonctionnalités principales
+
+- Création d'un jeu de plateau personnalisable.
+- Définition des actions des cases du jeu (par exemple, avancer, reculer, sauter des tours, etc.).
+- Interface utilisateur simple pour gérer le jeu et ses éléments.
+
+---
+
+## Installation
+
+1. Clonez ce dépôt sur votre machine locale :
    ```bash
-      npm install
-   ```
-
-2. Start the app
-
-   ```bash
-      npm run start
-   ```
-
-## Reinstaller la BD
-
-   go into assets/db
-   delete mydatabase.db
-   ```bash
-      sqlite3 mydatabase.db < init.sql
-   ```
-3. Expo go
-
-   CTRL+C pour fermer l'appli
-
+   git clone https://github.com/votre-utilisateur/Wakwa.git

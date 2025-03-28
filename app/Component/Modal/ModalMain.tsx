@@ -2,12 +2,8 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Link } from 'expo-router';
 import Modal from 'react-native-modal';
 
-interface ModalMainProps {
-  isModalVisible: boolean;
-  closePopup: () => void;
-  selectedPlateauIndex: string | null;
-  listPlateaux: Record<string, number>;
-}
+// Import Model
+import ModalMainProps from '../../Model/ModalMainProps';
 
 function ModalMain({ isModalVisible, closePopup, selectedPlateauIndex, listPlateaux }: ModalMainProps) {
   return (

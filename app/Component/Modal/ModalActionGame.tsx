@@ -1,11 +1,8 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 
-interface ModalActionGameProps {
-    isModalVisible: boolean;
-    closePopupActionGame: () => void;
-    currentCase: Record<string, number>;
-}
+// Import Model
+import ModalActionGameProps  from '../../Model/ModalActionGameProps';
 
 function ModalActionGame({ isModalVisible, closePopupActionGame, currentCase }: ModalActionGameProps) {
     const description = currentCase?.description ?? "test";

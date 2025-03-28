@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TextInput, Button, ScrollView,TouchableOpacity, Image } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
 import { Link } from 'expo-router'; 
-import { imageMappingPlayable } from '../images'; 
+import { imageMappingPlayable } from '../../Constant/images';
 
-interface Case {
-  description: string;
-  image: string;
-}
+//Import Model
+import Case from '../../Model/Case';
+import EditProps from '../../Model/EditProps';
 
-function Edit({ plateauId }) {
+
+function Edit({ plateauId } : EditProps) {
   const db = useSQLiteContext();
   const [plateauName, setPlateauName] = useState("");
   const [cases, setCases] = useState<Case[]>([]);
@@ -32,7 +32,7 @@ function Edit({ plateauId }) {
   }, [plateauId]);
 
   const addCase = () => {
-    setCases([...cases, { description: "", image: randomCase() }]); //TODO : changer l'image avec un random de imageMapping
+    setCases([...cases, { description: "", image: randomCase() }]);
   };
 
   const randomCase = () => {
@@ -127,9 +127,6 @@ function Edit({ plateauId }) {
 
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   ViewPage: {
     flexDirection: 'column',
     padding: 16,
