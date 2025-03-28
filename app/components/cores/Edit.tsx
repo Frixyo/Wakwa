@@ -1,42 +1,28 @@
+// Import librairies
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, ImageBackground, TextInput, Button, ScrollView,TouchableOpacity, Image } from 'react-native';
-import { useLocalSearchParams } from "expo-router";
-import { SQLiteProvider, useSQLiteContext } from 'expo-sqlite';
+import { Text, View, StyleSheet, TextInput, Button, ScrollView,TouchableOpacity, Image } from 'react-native';
+import { useSQLiteContext } from 'expo-sqlite';
 import { Link } from 'expo-router'; 
-import { imageMappingPlayable } from './images'; 
 
-interface Case {
-  description: string;
-  image: string;
-}
+// Import constants
+import { imageMappingPlayable } from '../../constants/images';
 
-export default function EditPage() {
-  const { plateauId } = useLocalSearchParams();
-
-  return (
-    <SQLiteProvider databaseName="mydatabasetest3.db" assetSource={{ assetId: require('../assets/db/mydatabasetest3.db') }}>
-      <ImageBackground source={require('../assets/bg/bg_1.png')} style={styles.background}>
-        <View>
-          <Edit plateauId={plateauId}/>
-        </View>
-      </ImageBackground>
-    </SQLiteProvider>
-  );
-}
+// Import models
+import Case from '../../models/Case';
+import EditProps from '../../models/EditProps';
 
 
+function Edit({ plateauId } : EditProps) {
 
-
-function Edit({ plateauId }) {
+  //States
   const db = useSQLiteContext();
   const [plateauName, setPlateauName] = useState("");
   const [cases, setCases] = useState<Case[]>([]);
 
-  // Récupérer les données du plateau
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const plateauResult = await db.getFirstAsync(`SELECT name FROM Plateaux WHERE id = ?`,[plateauId]);
+        const plateauResult = await db.getFirstAsync<{ name: string }>(`SELECT name FROM Plateaux WHERE id = ?`,[plateauId]);
         setPlateauName(plateauResult?.name || "");
 
         const result = await db.getAllAsync<Case>(`SELECT * FROM plateau${plateauId}`);
@@ -50,11 +36,11 @@ function Edit({ plateauId }) {
   }, [plateauId]);
 
   const addCase = () => {
-    setCases([...cases, { description: "", image: randomCase() }]); //TODO : changer l'image avec un random de imageMapping
+    setCases([...cases, { description: "", image: randomCase() }]);
   };
 
-  const randomCase = () => {
-    const keys = Object.keys(imageMappingPlayable);
+  const randomCase = (): keyof typeof imageMappingPlayable => {
+    const keys = Object.keys(imageMappingPlayable) as Array<keyof typeof imageMappingPlayable>;
     const randomIndex = Math.floor(Math.random() * keys.length); 
     return keys[randomIndex];
   };
@@ -63,7 +49,7 @@ function Edit({ plateauId }) {
     setCases(cases.slice(0, -1));
   };
 
-  const updateCase = (index, newDescription) => {
+  const updateCase = (index: number, newDescription: string) => {
     const newCases = [...cases];
     newCases[index] = { ...newCases[index], description: newDescription }; 
     setCases(newCases);
@@ -142,12 +128,7 @@ function Edit({ plateauId }) {
 }
 
 
-
-
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   ViewPage: {
     flexDirection: 'column',
     padding: 16,
@@ -169,4 +150,4 @@ const styles = StyleSheet.create({
 });
 
 
-
+export default Edit;
