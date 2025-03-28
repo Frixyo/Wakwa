@@ -11,13 +11,25 @@ import Plateau from '../../models/Plateau';
 
 
 
-function Plateaux() {
+export default function Plateaux() {
+
+    // States
     const db = useSQLiteContext();
     const [plateaux, setPlateaux] = useState<Plateau[]>([]);
     const [listPlateaux, setListPlateaux] = useState<Record<string, number>>({});
     const [isModalVisible, setModalVisible] = useState(false);
     const [selectedPlateauIndex, setSelectedPlateauIndex] = useState<number | null>(null);
   
+    useEffect(() => {
+      fetchPlateaux();
+    }, []);
+  
+    /**
+     * Fetch all plateaux from the database.
+     * 
+     * @returns void
+     * @throws {Error} - If an error occurs during the fetch
+     */
     const fetchPlateaux = async () => {
       try {
         const result = await db.getAllAsync<Plateau>('SELECT * FROM plateaux');
@@ -46,37 +58,45 @@ function Plateaux() {
         console.error('Erreur lors de la récupération des plateaux:', error);
       }
     };
-  
-    useEffect(() => {
-      fetchPlateaux();
-    }, []);
-  
+
+    /**
+     * Handle the button press event.
+     * 
+     * @param {number}
+     * @returns void
+     */
     const handleButtonPress = (index: number) => {
       setSelectedPlateauIndex(index);
       setModalVisible(true);
     };
   
+    /**
+     * Close the modal popup.
+     * 
+     * @returns void
+     */
     const closePopup = () => {
       setModalVisible(false);
     };
   
     return (
-      <View style={styles.container}>
-        <View style={styles.list}>
-          {plateaux.map((plateau) => (
-            <TouchableOpacity style={styles.item} key={plateau.id} onPress={() => handleButtonPress(plateau.id)} >
-              <Text >{plateau.name}</Text>
-            </TouchableOpacity>
-          ))}
-        </View>  
-        
-        <ModalMain isModalVisible={isModalVisible} closePopup={closePopup} selectedPlateauIndex={selectedPlateauIndex} listPlateaux={listPlateaux}
-        />
+        <View style={styles.container}>
 
-      </View>
+            <View style={styles.list}>
+              {plateaux.map((plateau) => (
+                <TouchableOpacity style={styles.item} key={plateau.id} onPress={() => handleButtonPress(plateau.id)} >
+                  <Text >{plateau.name}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>  
+            
+            <ModalMain isModalVisible={isModalVisible} closePopup={closePopup} selectedPlateauIndex={selectedPlateauIndex} listPlateaux={listPlateaux}/>
+
+        </View>
     );
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -93,4 +113,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Plateaux;

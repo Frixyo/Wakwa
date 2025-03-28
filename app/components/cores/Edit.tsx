@@ -22,7 +22,7 @@ function Edit({ plateauId } : EditProps) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const plateauResult = await db.getFirstAsync(`SELECT name FROM Plateaux WHERE id = ?`,[plateauId]);
+        const plateauResult = await db.getFirstAsync<{ name: string }>(`SELECT name FROM Plateaux WHERE id = ?`,[plateauId]);
         setPlateauName(plateauResult?.name || "");
 
         const result = await db.getAllAsync<Case>(`SELECT * FROM plateau${plateauId}`);
@@ -39,8 +39,8 @@ function Edit({ plateauId } : EditProps) {
     setCases([...cases, { description: "", image: randomCase() }]);
   };
 
-  const randomCase = () => {
-    const keys = Object.keys(imageMappingPlayable);
+  const randomCase = (): keyof typeof imageMappingPlayable => {
+    const keys = Object.keys(imageMappingPlayable) as Array<keyof typeof imageMappingPlayable>;
     const randomIndex = Math.floor(Math.random() * keys.length); 
     return keys[randomIndex];
   };
@@ -49,7 +49,7 @@ function Edit({ plateauId } : EditProps) {
     setCases(cases.slice(0, -1));
   };
 
-  const updateCase = (index, newDescription) => {
+  const updateCase = (index: number, newDescription: string) => {
     const newCases = [...cases];
     newCases[index] = { ...newCases[index], description: newDescription }; 
     setCases(newCases);

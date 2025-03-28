@@ -9,6 +9,8 @@ import PlayersProps from '../../models/PlayersProps';
 
 
 export default function Players({ joueurs, setJoueurs }: PlayersProps) {
+
+    // States
     const db = useSQLiteContext();
   
     useEffect(() => {
@@ -19,7 +21,15 @@ export default function Players({ joueurs, setJoueurs }: PlayersProps) {
   
       fetchJoueurs();
     }, [db]);
-  
+
+
+    /**
+     * Delete a player from the database.
+     * 
+     * @param index - Index of the player to delete.
+     * @returns void
+     * @throws {Error} - If an error occurs during the deletion in the database
+     */
     const supprimerJoueur = async (index : number) => {
       try {
         await db.runAsync('DELETE FROM users WHERE id = $id', { $id: index });
@@ -49,3 +59,8 @@ export default function Players({ joueurs, setJoueurs }: PlayersProps) {
       </View>
     );
 }
+
+// Styles
+const styles = StyleSheet.create({
+
+});
