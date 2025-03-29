@@ -27,7 +27,7 @@ export default function Players({ joueurs, setJoueurs }: PlayersProps) {
      * Delete a player from the database.
      * 
      * @param index - Index of the player to delete.
-     * @returns void
+     * @returns {void}
      * @throws {Error} - If an error occurs during the deletion in the database
      */
     const supprimerJoueur = async (index : number) => {
