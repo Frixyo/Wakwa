@@ -32,7 +32,9 @@ export default function Game({ plateauId }: GameProps) {
   
     const fetchCases = async () => {
       try {
-        const result = await db.getAllAsync<Case>(`SELECT * FROM plateau${plateauId}`);
+        const result = await db.getAllAsync<Case>(
+          `SELECT * FROM plateau${plateauId}`
+        );
     
         const fullCases: Case[] = [
           { description: "Case Vide", image: "cartevide_01" },
@@ -174,8 +176,8 @@ export default function Game({ plateauId }: GameProps) {
                   {playersOnCase.map((joueur, playerIndex) => {
                     const isActive = joueur.name === joueurs[joueurActifIndex].name;
                     const playerImageStyle = isActive
-                      ? { width: 50, height: 50 ,bottom: '-10%' }
-                      : { width: 30, height: 30, bottom: '-200%' };
+                      ? { width: 50, height: 50 ,bottom: '-10%' as any }
+                      : { width: 30, height: 30, bottom: '-200%' as any };
     
                     return (
                       <Animated.View

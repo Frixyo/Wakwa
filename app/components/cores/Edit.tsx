@@ -123,7 +123,7 @@ export default function Edit({ plateauId } : EditProps) {
               <View key={index} style={{ flexDirection: "row", alignItems: "center", marginBottom: 5 }}>
                 <Text>{`N°${index + 1}`}</Text>
                 <Image 
-                  source={imageMappingPlayable[item.image]} 
+                  source={imageMappingPlayable[item.image as keyof typeof imageMappingPlayable]} 
                   style={{ width: 50, height: 50, resizeMode: "contain", marginLeft: 10 }} 
                 />
                 <TextInput
