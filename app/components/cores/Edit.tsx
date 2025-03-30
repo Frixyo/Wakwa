@@ -12,7 +12,7 @@ import Case from '../../models/Case';
 import EditProps from '../../models/EditProps';
 
 
-function Edit({ plateauId } : EditProps) {
+export default function Edit({ plateauId } : EditProps) {
 
   //States
   const db = useSQLiteContext();
@@ -25,38 +25,63 @@ function Edit({ plateauId } : EditProps) {
         const plateauResult = await db.getFirstAsync<{ name: string }>(`SELECT name FROM Plateaux WHERE id = ?`,[plateauId]);
         setPlateauName(plateauResult?.name || "");
 
-        const result = await db.getAllAsync<Case>(`SELECT * FROM plateau${plateauId}`);
+        const result = await db.getAllAsync<Case>(`SELECT * FROM Cases WHERE plateaux_id = ?`, [plateauId]);
         setCases(result);
       } catch (error) {
         console.error("Erreur lors du chargement :", error);
       }
     };
-
     fetchData();
-  }, [plateauId]);
+  }, []);
 
+  /**
+   * Add a new case to the list of cases.
+   * 
+   * @returns {void}
+   */
   const addCase = () => {
     setCases([...cases, { description: "", image: randomCase() }]);
   };
 
+  /**
+   * Get a random case from the image mapping.
+   * 
+   * @returns {keyof typeof imageMappingPlayable} - A random key from the image mapping.
+   */
   const randomCase = (): keyof typeof imageMappingPlayable => {
     const keys = Object.keys(imageMappingPlayable) as Array<keyof typeof imageMappingPlayable>;
     const randomIndex = Math.floor(Math.random() * keys.length); 
     return keys[randomIndex];
   };
-
-  const removeCase = () => {
+  
+  /**
+   * Remove the last case from the list of cases.
+   * 
+   * @return {void}
+   */
+  const removeLastCase = () => {
     setCases(cases.slice(0, -1));
   };
 
+  /**
+   * Update the description of a case at a specific index.
+   * 
+   * @param {number}
+   * @param {string} newDescription - The new description for the case.
+   * @return {void}
+   */
   const updateCase = (index: number, newDescription: string) => {
     const newCases = [...cases];
     newCases[index] = { ...newCases[index], description: newDescription }; 
     setCases(newCases);
-};
+  };
 
 
-  // Enregistrer les modifications
+  /**
+   * Save the changes made to the plateau and its cases in the database.
+   * 
+   * @return {Promise<void>}
+   */
   const saveChanges = async () => {
     try {
       await db.runAsync(`UPDATE Plateaux SET name = ? WHERE id = ?`, [
@@ -64,14 +89,14 @@ function Edit({ plateauId } : EditProps) {
         plateauId,
       ]);
 
-      await db.runAsync(`DELETE FROM plateau${plateauId}`);
+      await db.runAsync(`DELETE FROM Cases WHERE plateaux_id = ? `, [plateauId]);
 
       if (cases.length > 0) {
-        const placeholders = cases.map(() => "(?, ?)").join(", ");
-        const values = cases.flatMap(({description, image }) => [description, image]);
+        const placeholders = cases.map(() => "(?, ?, ?)").join(", ");
+        const values = cases.flatMap(({description, image }) => [plateauId, description, image]);
       
         await db.runAsync(
-          `INSERT INTO plateau${plateauId} (description, image) VALUES ${placeholders}`,
+          `INSERT INTO Cases (plateaux_id, description, image) VALUES ${placeholders}`,
           values
         );
       }
@@ -98,7 +123,7 @@ function Edit({ plateauId } : EditProps) {
               <View key={index} style={{ flexDirection: "row", alignItems: "center", marginBottom: 5 }}>
                 <Text>{`N°${index + 1}`}</Text>
                 <Image 
-                  source={imageMappingPlayable[item.image]} 
+                  source={imageMappingPlayable[item.image as keyof typeof imageMappingPlayable]} 
                   style={{ width: 50, height: 50, resizeMode: "contain", marginLeft: 10 }} 
                 />
                 <TextInput
@@ -113,7 +138,7 @@ function Edit({ plateauId } : EditProps) {
         </View>
         <View>
           <Button title="Ajouter une case" onPress={addCase} />
-          <Button title="Supprimer la dernière case" onPress={removeCase} />
+          <Button title="Supprimer la dernière case" onPress={removeLastCase} />
           <Button title="Terminer" onPress={saveChanges} />
 
           <TouchableOpacity>
@@ -148,6 +173,3 @@ const styles = StyleSheet.create({
     width: 400,
   },
 });
-
-
-export default Edit;

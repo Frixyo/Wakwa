@@ -17,7 +17,8 @@ import Joueur from '../../models/Joueur';
 import GameProps from '../../models/GameProps';
 
 
-function Game({ plateauId }: GameProps) {
+export default function Game({ plateauId }: GameProps) {
+    // States
     const db = useSQLiteContext();
     const [cases, setCases] = useState<Case[]>([]);
     const [joueurs, setJoueurs] = useState<Joueur[]>([]);
@@ -31,7 +32,7 @@ function Game({ plateauId }: GameProps) {
   
     const fetchCases = async () => {
       try {
-        const result = await db.getAllAsync<Case>(`SELECT * FROM plateau${plateauId}`);
+        const result = await db.getAllAsync<Case>(`SELECT * FROM cases WHERE plateaux_id = ?`, [plateauId]);
     
         const fullCases: Case[] = [
           { description: "Case Vide", image: "cartevide_01" },
@@ -49,7 +50,7 @@ function Game({ plateauId }: GameProps) {
         console.error('Error fetching cases:', error);
       }
     };
-    
+
     const fetchJoueurs = async () => {
       try {
         const result = await db.getAllAsync<Joueur>('SELECT * FROM users');
@@ -60,35 +61,75 @@ function Game({ plateauId }: GameProps) {
         console.error('Error fetching joueurs:', error);
       }
     };
-    
+
     useEffect(() => {
-      if (plateauId) {
-        fetchCases();
-        fetchJoueurs();
-        console.log(joueurs);
-      }
+      fetchCases();
+      fetchJoueurs();
     }, [plateauId]);
+
+    useEffect(() => {
+      if (joueurs.length > 0) {
+        setCurrentIndex(positionsJoueurs[joueurs[joueurActifIndex].name]);
+      }
+    }, [joueurActifIndex, joueurs]);
     
   
-    
+    /**
+     * Function to go to the next case
+     * 
+     * @returns {void}
+     */
     const goNext = () => {
       if (currentIndex < cases.length - 2) {
         setCurrentIndex(prev => prev + 1);
       }
     };
   
+    /**
+     * Function to go to the next case
+     * 
+     * @returns {void}
+     */
     const goPrev = () => {
       if (currentIndex > 0) {
         setCurrentIndex(prev => prev - 1);
       }
     };
-  
-    const visibleCases = [
-      cases[currentIndex - 1],
-      cases[currentIndex],
-      cases[currentIndex + 1]
-    ].filter(Boolean);
-  
+
+    /**
+     * Function to change the active player
+     * 
+     * @returns {void}
+     */
+    const changerJoueur = () => {
+      const nextIndex = joueurActifIndex + 1;
+      if (nextIndex >= joueurs.length) {
+        setJoueurActifIndex(0);
+      } else {
+        setJoueurActifIndex(nextIndex);
+      }
+      setJoueurSpinDice(false);
+    };
+    
+    /**
+     * Function to roll the dice and move the player
+     * 
+     * @returns {void}
+     */
+    const rollDice = () => {
+      if (joueurs.length === 0 || joueurSpinDice) return;
+      const random = Math.floor(Math.random() * 6) + 1;
+      setJoueurSpinDice(true);
+      setPositionsJoueurs((prevPositions) => {
+        const newPosition = Math.min((prevPositions[joueurs[joueurActifIndex].name] || 0) + random, cases.length - 2);
+        return { ...prevPositions, [joueurs[joueurActifIndex].name]: newPosition };
+      });
+    
+      const newIndex = positionsJoueurs[joueurs[joueurActifIndex].name] + random;
+      setCurrentIndex(Math.min(newIndex, cases.length - 2));
+    
+    }
+
     const openPopupActionGame = () => {
       setModalVisibleActionGame(true);
     };
@@ -104,39 +145,12 @@ function Game({ plateauId }: GameProps) {
     const closePopupParametre = () => {
         setModalVisibleParametre(false);
     };
-  
     
-    const changerJoueur = () => {
-      const nextIndex = joueurActifIndex + 1;
-      if (nextIndex >= joueurs.length) {
-        setJoueurActifIndex(0);
-      } else {
-        setJoueurActifIndex(nextIndex);
-      }
-      setJoueurSpinDice(false);
-    };
-    
-    useEffect(() => {
-      if (joueurs.length > 0 && joueurs[joueurActifIndex]) {
-        setCurrentIndex(positionsJoueurs[joueurs[joueurActifIndex].name]);
-      }
-    }, [joueurActifIndex, joueurs]);
-    
-  
-    const rollDice = () => {
-      if (joueurs.length === 0 || joueurSpinDice) return;
-      const random = Math.floor(Math.random() * 6) + 1;
-      setJoueurSpinDice(true);
-      setPositionsJoueurs((prevPositions) => {
-        const newPosition = Math.min((prevPositions[joueurs[joueurActifIndex].name] || 0) + random, cases.length - 2);
-        return { ...prevPositions, [joueurs[joueurActifIndex].name]: newPosition };
-      });
-    
-      const newIndex = positionsJoueurs[joueurs[joueurActifIndex].name] + random;
-      setCurrentIndex(Math.min(newIndex, cases.length - 2));
-    
-    }
-    
+    const visibleCases = [
+      cases[currentIndex - 1],
+      cases[currentIndex],
+      cases[currentIndex + 1]
+    ].filter(Boolean);
   
     return (
       <View style={styles.container}>
@@ -160,8 +174,8 @@ function Game({ plateauId }: GameProps) {
                   {playersOnCase.map((joueur, playerIndex) => {
                     const isActive = joueur.name === joueurs[joueurActifIndex].name;
                     const playerImageStyle = isActive
-                      ? { width: 50, height: 50 ,bottom: '-10%' }
-                      : { width: 30, height: 30, bottom: '-200%' };
+                      ? { width: 50, height: 50 ,bottom: '-10%' as any }
+                      : { width: 30, height: 30, bottom: '-200%' as any };
     
                     return (
                       <Animated.View
@@ -300,5 +314,3 @@ const styles = StyleSheet.create({
       marginVertical: 5,
     },
   });
-
-export default Game;

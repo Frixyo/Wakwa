@@ -35,14 +35,14 @@ export default function Plateaux() {
         const result = await db.getAllAsync<Plateau>('SELECT * FROM plateaux');
         setPlateaux(result);
   
-        const result1 = await db.getAllAsync('SELECT * FROM Plateau1');
-        const result2 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau2');
-        const result3 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau3');
-        const result4 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau4');
-        const result5 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau5');
-        const result6 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau6');
-        const result7 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau7');
-        const result8 = await db.getAllAsync<Plateau>('SELECT * FROM Plateau8');
+        const result1 = await db.getAllAsync('SELECT * FROM cases WHERE plateaux_id = 1');
+        const result2 = await db.getAllAsync('SELECT * FROM cases WHERE plateaux_id = 2');
+        const result3 = await db.getAllAsync('SELECT * FROM cases WHERE plateaux_id = 3');
+        const result4 = await db.getAllAsync('SELECT * FROM cases WHERE plateaux_id = 4');
+        const result5 = await db.getAllAsync('SELECT * FROM cases WHERE plateaux_id = 5');
+        const result6 = await db.getAllAsync('SELECT * FROM cases WHERE plateaux_id = 6');
+        const result7 = await db.getAllAsync('SELECT * FROM cases WHERE plateaux_id = 7');
+        const result8 = await db.getAllAsync('SELECT * FROM cases WHERE plateaux_id = 8');
         setListPlateaux({
           1: result1.length,
           2: result2.length,
