@@ -26,6 +26,6 @@ export const playerImageMapping = f({
 });  
 
 function f<T extends Record<string, string>>(obj: T): {[K in keyof T]: ImageSourcePropType  } {
-    return obj;
+    return obj as { [K in keyof T]: ImageSourcePropType };
 }
 

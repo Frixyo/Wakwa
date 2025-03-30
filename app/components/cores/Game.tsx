@@ -32,9 +32,7 @@ export default function Game({ plateauId }: GameProps) {
   
     const fetchCases = async () => {
       try {
-        const result = await db.getAllAsync<Case>(
-          `SELECT * FROM plateau${plateauId}`
-        );
+        const result = await db.getAllAsync<Case>(`SELECT * FROM cases WHERE plateaux_id = ?`, [plateauId]);
     
         const fullCases: Case[] = [
           { description: "Case Vide", image: "cartevide_01" },

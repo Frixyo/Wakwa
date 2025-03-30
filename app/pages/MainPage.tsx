@@ -9,7 +9,7 @@ import Plateaux from '../components/cores/Plateaux';
 export default function MainPage() {
 
   return (
-    <SQLiteProvider databaseName="mydatabasetest3.db" assetSource={{ assetId: require('../../assets/db/mydatabasetest3.db') }}>
+    <SQLiteProvider databaseName="mydatabase2.db" assetSource={{ assetId: require('../../assets/db/mydatabase2.db') }}>
       <ImageBackground source={require('../../assets/bg/bg_1.png')} style={styles.background}>
         <ScrollView>
 

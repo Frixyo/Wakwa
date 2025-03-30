@@ -25,7 +25,7 @@ export default function Edit({ plateauId } : EditProps) {
         const plateauResult = await db.getFirstAsync<{ name: string }>(`SELECT name FROM Plateaux WHERE id = ?`,[plateauId]);
         setPlateauName(plateauResult?.name || "");
 
-        const result = await db.getAllAsync<Case>(`SELECT * FROM plateau${plateauId}`);
+        const result = await db.getAllAsync<Case>(`SELECT * FROM Cases WHERE plateaux_id = ?`, [plateauId]);
         setCases(result);
       } catch (error) {
         console.error("Erreur lors du chargement :", error);
@@ -89,14 +89,14 @@ export default function Edit({ plateauId } : EditProps) {
         plateauId,
       ]);
 
-      await db.runAsync(`DELETE FROM plateau${plateauId}`);
+      await db.runAsync(`DELETE FROM Cases WHERE plateaux_id = ? `, [plateauId]);
 
       if (cases.length > 0) {
-        const placeholders = cases.map(() => "(?, ?)").join(", ");
-        const values = cases.flatMap(({description, image }) => [description, image]);
+        const placeholders = cases.map(() => "(?, ?, ?)").join(", ");
+        const values = cases.flatMap(({description, image }) => [plateauId, description, image]);
       
         await db.runAsync(
-          `INSERT INTO plateau${plateauId} (description, image) VALUES ${placeholders}`,
+          `INSERT INTO Cases (plateaux_id, description, image) VALUES ${placeholders}`,
           values
         );
       }
